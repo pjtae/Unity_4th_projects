@@ -2,7 +2,7 @@
 {
     internal class Program
     {
-        const int MB = 1024;
+        const int MB = 1024 * 1024;
         static void Main(string[] args)
         {
             #region 쓰레드 task 구현
