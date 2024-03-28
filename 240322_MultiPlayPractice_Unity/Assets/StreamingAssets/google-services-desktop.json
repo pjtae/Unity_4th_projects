@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "319024990053",
+    "project_id": "korcham4th-park",
+    "storage_bucket": "korcham4th-park.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:319024990053:android:d797a7017669a3fac8038c",
+        "android_client_info": {
+          "package_name": "com.korcham4thPjt.multiProjectpractice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3Ze6adcrJcZJ8io7eC3cj99FC53IrV6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
