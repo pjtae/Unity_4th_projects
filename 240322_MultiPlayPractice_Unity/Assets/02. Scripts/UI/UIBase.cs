@@ -43,7 +43,6 @@ namespace MP.UI
             _canvas = GetComponent<Canvas>();
             _module = GetComponent<GraphicRaycaster>();
             _eventSystem = EventSystem.current;
-            UIManager.instance.RegisterPopup(this);
         }
         public virtual void Show()
         {

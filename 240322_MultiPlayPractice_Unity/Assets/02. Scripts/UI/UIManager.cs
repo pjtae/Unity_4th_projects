@@ -9,14 +9,14 @@ using TMPro.EditorUtilities;
 
 namespace MP.UI
 {
-    public class Test
+    /*public class Test
     {
         void main()
         {
             UIManager.instance.Get<UIWarningWindow>().Show();
             //팝업 창은 
         }
-    }
+    }*/
 
     /// <summary>
     /// 모든 UI를 관리, 전체 스크린용 및 팝업용 UI 추가로 관리.
@@ -59,7 +59,7 @@ namespace MP.UI
         {
             if (_uis.TryAdd(ui.GetType(), ui))
             {
-                _screens.Add(ui);
+                //_screens.Add(ui);
             }
             else
             {
@@ -74,7 +74,7 @@ namespace MP.UI
         {
             if (_uis.TryAdd(ui.GetType(), ui))
             {
-                _screens.Add(ui);
+                //_screens.Add(ui);
             }
             else
             {
@@ -122,6 +122,20 @@ namespace MP.UI
             // 이전 팝업의 입력이 먹히게
             if (_popups.Count > 0)
                 _popups.Peek().inputActionEnable = true;
+        }
+
+        /// <summary>
+        /// 전체화면 UI 룰 설정
+        /// </summary>
+        public void SetScreen(IUI ui)
+        {
+            for (int i = _screens.Count - 1; i >= 0; i--)
+            {
+                _screens[i].Hide();
+                _screens[i].Show();
+            }
+
+            _screens.Add(ui);
         }
     }
 }

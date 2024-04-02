@@ -8,7 +8,14 @@ namespace MP.UI
         {
             base.Awake();
 
-            UIManager.instance.RegisterPopup(this);
+            UIManager.instance.RegisterScreen(this);
+        }
+
+        public override void Show()
+        {
+            base.Show();
+
+            UIManager.instance.SetScreen(this);
         }
     }
 }

@@ -6,6 +6,10 @@ namespace MP.UI
 {
     public class UILodingPanel : UIScreenbase
     {
+        protected override void Awake()
+        {
+            base.Awake();
+        }
 
         public override void Show()
         {

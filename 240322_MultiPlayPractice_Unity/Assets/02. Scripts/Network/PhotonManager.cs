@@ -1,3 +1,4 @@
+using MP.Authentication;
 using Photon.Pun;
 using UnityEngine;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
@@ -36,6 +37,8 @@ namespace MP.Network
         {
             base.OnConnected();
             PhotonNetwork.AutomaticallySyncScene = true; //PhotonNetwork.LoadLevel() 호출시 현재 동일한 방에있는 모든 클라이언트의 씬을 동기화 하는 옵션
+            PhotonNetwork.NickName = LoginInformation.nickname; // user마다 닉네임 선정
+
             //PhotonNetwork.JoinLobby();
             //PhotonNetwork.CreateRoom();
 
@@ -43,7 +46,7 @@ namespace MP.Network
 
         public override void OnJoinedLobby()
         {
-            base.OnLeftLobby();
+            base.OnJoinedLobby();
             Debug.Log($"[PhotonManager] : Joined Lobby.");
         }
 

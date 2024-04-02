@@ -21,6 +21,18 @@ namespace MP.Singleton
         }
 
         private static T s_instance;
+
+
+        protected virtual void Awake()
+        {
+            if (s_instance == null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            s_instance = (T)this;
+        }
     }
 
     //인스펙터에서 추가하던 addcomponent 구현

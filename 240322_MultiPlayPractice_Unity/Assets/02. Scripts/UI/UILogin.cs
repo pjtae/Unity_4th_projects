@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Firebase.Firestore;
 using UnityEditor.VersionControl;
 using UnityEngine.SceneManagement;
+using MP.Utilities;
 
 namespace MP.UI
 {
@@ -32,10 +33,17 @@ namespace MP.UI
             _register = transform.Find("Panel/Button - Register").GetComponent<Button>();
             //git hub를 사용하고 메타파일을 겹치지 않게 하기 위해서 직접 연결해준다.
 
-            var dependecnyState = await FirebaseApp.CheckAndFixDependenciesAsync();
+            _ = FirebaseApp.CheckAndFixDependenciesAsync()
+                .ContinueWith(task =>
+                {
+                    if (task.Result != DependencyStatus.Available)
+                        throw new Exception();
+                });
+
+            /*var dependecnyState = await FirebaseApp.CheckAndFixDependenciesAsync();
 
             if (dependecnyState != DependencyStatus.Available)
-                throw new Exception();
+                throw new Exception();*/
 
             _tryLogin.onClick.AddListener(() =>
             {
@@ -75,7 +83,10 @@ namespace MP.UI
                                                                     Debug.Log("Finished Get profile document");
 
                                                                     if (documentDictionary?.TryGetValue("nickname", out object value) ?? false)
+                                                                    {
+                                                                        LoginInformation.nickname = (string)value;
                                                                         SceneManager.LoadScene("Lobby");
+                                                                    }
                                                                     else
                                                                     {
                                                                         UIManager.instance.Get<UIProfileSettingWindow>().Show();
@@ -114,17 +125,23 @@ namespace MP.UI
                                             {
                                                 if (task.IsCanceled)
                                                 {
-                                                    // todo -> 회원가입 취소에 대한 알림창 팝업    TODO작성시 통일화
-                                                    UIManager.instance.Get<UIWarningWindow>()
-                                                                      .Show(task.Exception.Message);
+                                                    UpdateDispatcher.instance.Enqueue(() =>
+                                                    {
+                                                        // todo -> 회원가입 취소에 대한 알림창 팝업    TODO작성시 통일화
+                                                        UIManager.instance.Get<UIWarningWindow>()
+                                                                          .Show(task.Exception.Message);
+                                                    });
                                                     return;
                                                 }
 
                                                 if (task.IsFaulted)
                                                 {
-                                                    // todo -> 회원가입 실패에 대한 알림창 팝업
-                                                    UIManager.instance.Get<UIWarningWindow>()
-                                                                      .Show(task.Exception.Message);
+                                                    UpdateDispatcher.instance.Enqueue(() =>
+                                                    {
+                                                        // todo -> 회원가입 실패에 대한 알림창 팝업
+                                                        UIManager.instance.Get<UIWarningWindow>()
+                                                                          .Show(task.Exception.Message);
+                                                    });
                                                     return;
                                                 }
 

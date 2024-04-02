@@ -26,10 +26,10 @@ namespace MP.UI
                 _joinRoom.interactable = value > NOT_SELECTED;
             }
         }
-
-        private int _roomListSlotIndexSelected = NOT_SELECTED; 
+        
 
         // Main panel
+        private int _roomListSlotIndexSelected = NOT_SELECTED;
         private RoomListSlot _roomListSlot;
         private List<RoomListSlot> _roomListSlots = new List<RoomListSlot>(20); //리썰팅을 하는이유 / 가비지 컬렉션이 일어나는걸 방지하기 위해서 o/n 
         private RectTransform _roomListContent;
@@ -188,6 +188,8 @@ namespace MP.UI
         {
             UIManager.instance.Get<UILodingPanel>()
                             .Hide();
+            UIManager.instance.Get<UIReadyGamePlayReadyisRoom>()
+                            .Show();
         }
 
         public void OnJoinRoomFailed(short returnCode, string message)
