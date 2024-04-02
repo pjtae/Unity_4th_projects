@@ -59,7 +59,7 @@ namespace MP.UI
         {
             if (_uis.TryAdd(ui.GetType(), ui))
             {
-                //_screens.Add(ui);
+                _screens.Add(ui);
             }
             else
             {
@@ -74,7 +74,7 @@ namespace MP.UI
         {
             if (_uis.TryAdd(ui.GetType(), ui))
             {
-                //_screens.Add(ui);
+                _screens.Add(ui);
             }
             else
             {
